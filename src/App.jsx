@@ -464,7 +464,7 @@ export default function App() {
                 <div className="contact-icon-wrapper">
                   <span className="contact-icon">📱</span>
                 </div>
-                <h4>Call Us</h4>
+                <h4>WhatsApp & Call Us</h4>
               </div>
               <div className="contact-card-content">
                 <div className="contact-person">
