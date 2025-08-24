@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import codeVaultLogo from './my-assets/Code-Vault-Logo.png'
@@ -12,6 +11,7 @@ export default function App() {
   const [selectedCollege, setSelectedCollege] = useState('')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState({})
+  const [timeLeft, setTimeLeft] = useState({})
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,6 +31,35 @@ export default function App() {
     document.querySelectorAll('[id]').forEach((el) => observer.observe(el))
 
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const eventDate = new Date('2025-09-19T09:00:00+05:30') // September 19th, 2025 at 9:00 AM IST
+      const now = new Date()
+      const difference = eventDate - now
+
+      let timeLeft = {}
+
+      if (difference > 0) {
+        timeLeft = {
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        }
+      }
+
+      return timeLeft
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft())
+    }, 1000)
+
+    setTimeLeft(calculateTimeLeft())
+
+    return () => clearInterval(timer)
   }, [])
 
   const openModal = () => {
@@ -163,6 +192,36 @@ export default function App() {
               <span className="detail-icon">💰</span>
               <span>Prize Pool: ₹50,000</span>
             </div>
+          </div>
+          <div className={`countdown-timer ${isVisible.hero ? 'fade-in-up delay-2-5' : ''}`}>
+            {Object.keys(timeLeft).length === 0 ? (
+              <div className="countdown-ended">Event has started!</div>
+            ) : (
+              <>
+                <div className="countdown-title">Event starts in:</div>
+                <div className="countdown-display">
+                  <div className="countdown-item">
+                    <span className="countdown-number">{timeLeft.days || 0}</span>
+                    <span className="countdown-label">Days</span>
+                  </div>
+                  <div className="countdown-separator">:</div>
+                  <div className="countdown-item">
+                    <span className="countdown-number">{timeLeft.hours || 0}</span>
+                    <span className="countdown-label">Hours</span>
+                  </div>
+                  <div className="countdown-separator">:</div>
+                  <div className="countdown-item">
+                    <span className="countdown-number">{timeLeft.minutes || 0}</span>
+                    <span className="countdown-label">Minutes</span>
+                  </div>
+                  <div className="countdown-separator">:</div>
+                  <div className="countdown-item">
+                    <span className="countdown-number">{timeLeft.seconds || 0}</span>
+                    <span className="countdown-label">Seconds</span>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <button className={`cta-button ${isVisible.hero ? 'fade-in-up delay-3' : ''}`} onClick={openModal}>
             Register Now
@@ -457,7 +516,7 @@ export default function App() {
                   </svg>
                   Instagram
                 </a>
-                <a href="https://www.linkedin.com/company/csbs-mitm/" className="footer-social-link">
+                <a href="https://www.linkedin.com/company/csbs-fam/" className="footer-social-link">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
