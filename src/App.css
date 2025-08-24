@@ -2448,6 +2448,7 @@ body {
     gap: 0.15rem;
     padding: 0 0.5rem;
     max-width: 100%;
+    margin: 0 1rem;
   }
 
   .countdown-item {
@@ -2644,6 +2645,7 @@ body {
     gap: 0.05rem;
     padding: 0 0.3rem;
     max-width: 100%;
+    margin: 0 1.5rem;
   }
 
   .countdown-item {
