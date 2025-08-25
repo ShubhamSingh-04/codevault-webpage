@@ -456,6 +456,7 @@ export default function App() {
               </div>
               <div className="contact-card-content">
                 <a href="mailto:codevault2025.csbs@gmail.com">codevault2025.csbs@gmail.com</a>
+                <p className="contact-name">Use this email for queries related to registration, accommodation, sponsorships, or general event information.</p>
               </div>
             </div>
 
@@ -467,6 +468,10 @@ export default function App() {
                 <h4>WhatsApp & Call Us</h4>
               </div>
               <div className="contact-card-content">
+                <div className="contact-person">
+                  <a href="tel:+919743439414">+91 9743439414</a>
+                  <p className="contact-name">Deepak P</p>
+                </div>
                 <div className="contact-person">
                   <a href="tel:+918867174310">+91 8867174310</a>
                   <p className="contact-name">Shubham Singh</p>
